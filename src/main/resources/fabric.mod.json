@@ -18,6 +18,9 @@
       "net.smootheez.elytracontrol.ElytraControl"
     ]
   },
+  "mixins": [
+    "elytracontrol.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=${loader_version}",
     "fabric": "*",
