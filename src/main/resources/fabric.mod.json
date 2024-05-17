@@ -8,7 +8,9 @@
     "Smootheez"
   ],
   "contact": {
-    "repo": "https://github.com/Smootheez/Elytra-Control"
+    "homepage": "https://github.com/Smootheez/Elytra-Control",
+    "sources": "https://github.com/Smootheez/Elytra-Control",
+    "issues": "https://github.com/Smootheez/Elytra-Control/issues"
   },
   "license": "GNU General Public License v3.0",
   "icon": "assets/elytracontrol/icon.png",
