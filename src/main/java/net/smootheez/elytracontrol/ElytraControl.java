@@ -13,12 +13,13 @@ import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class ElytraControl implements ClientModInitializer {
-    protected static boolean elytraToggle = false;
+    public static boolean elytraToggle = true;
     protected static final KeyBinding elytraToggleKey = new KeyBinding(
             "key." + Constants.MOD_ID + ".elytra_toggle",
             InputUtil.GLFW_KEY_V,
             KeyBinding.GAMEPLAY_CATEGORY
     );
+    public static String playerUUID;
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
@@ -28,17 +29,17 @@ public class ElytraControl implements ClientModInitializer {
                 return;
             }
 
+            if (playerUUID == null) {
+                playerUUID = client.player.getUuidAsString();
+            }
+
             while (elytraToggleKey.wasPressed()) {
                 elytraToggle = !elytraToggle;
-                if (!elytraToggle){
+                if (elytraToggle){
                     client.inGameHud.setOverlayMessage(Text.translatable("message." +  Constants.MOD_ID + ".elytra_enabled"), false);
                 }else {
                     client.inGameHud.setOverlayMessage(Text.translatable("message." +  Constants.MOD_ID + ".elytra_disabled"), false);
                 }
-            }
-
-            if (client.player.isFallFlying() && elytraToggle) {
-                client.player.stopFallFlying();
             }
 
             while (shouldStopFlying(client)) {
