@@ -20,10 +20,15 @@ public class ElytraControl implements ClientModInitializer {
             KeyBinding.GAMEPLAY_CATEGORY
     );
     public static String playerUUID;
+    private static final Text ELYTRA_ENABLED_TEXT = Text.translatable("message." + Constants.MOD_ID + ".elytra_enabled");
+    private static final Text ELYTRA_DISABLED_TEXT = Text.translatable("message." + Constants.MOD_ID + ".elytra_disabled");
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
+        endClientTickEvent();
+    }
 
+    private void endClientTickEvent() {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (client.player == null) {
                 return;
@@ -35,11 +40,7 @@ public class ElytraControl implements ClientModInitializer {
 
             while (elytraToggleKey.wasPressed()) {
                 elytraToggle = !elytraToggle;
-                if (elytraToggle){
-                    client.inGameHud.setOverlayMessage(Text.translatable("message." +  Constants.MOD_ID + ".elytra_enabled"), false);
-                }else {
-                    client.inGameHud.setOverlayMessage(Text.translatable("message." +  Constants.MOD_ID + ".elytra_disabled"), false);
-                }
+                client.inGameHud.setOverlayMessage(elytraToggle ? ELYTRA_ENABLED_TEXT : ELYTRA_DISABLED_TEXT, false);
             }
 
             while (shouldStopFlying(client)) {
@@ -48,18 +49,11 @@ public class ElytraControl implements ClientModInitializer {
 
         });
     }
-
     protected boolean shouldStopFlying(MinecraftClient client) {
         if (client.player == null) {
             return false;
         }
 
-        boolean isJumpKeyPressed = client.options.jumpKey.wasPressed();
-        boolean isNotOnGround = !client.player.isOnGround();
-        boolean isNotTouchingWater = !client.player.isTouchingWater();
-        boolean hasNoLevitationEffect = !client.player.hasStatusEffect(StatusEffects.LEVITATION);
-        boolean wasFallFlying = client.player.isFallFlying();
-
-        return isJumpKeyPressed && isNotOnGround && isNotTouchingWater && hasNoLevitationEffect && wasFallFlying;
+        return client.options.jumpKey.wasPressed() && !client.player.isOnGround() && !client.player.isTouchingWater() && !client.player.hasStatusEffect(StatusEffects.LEVITATION) && client.player.isFallFlying();
     }
 }
