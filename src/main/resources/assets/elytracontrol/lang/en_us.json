@@ -1,8 +1,7 @@
 {
   "key.elytracontrol.elytra_toggle": "Toggle Elytra",
 
-  "message.elytracontrol.elytra_enabled": "Elytra §aEnabled",
-  "message.elytracontrol.elytra_disabled": "Elytra §cDisabled",
+  "message.elytracontrol.toggle": "Toggle Elytra",
 
   "key.category.elytracontrol": "Elytra Control"
 }

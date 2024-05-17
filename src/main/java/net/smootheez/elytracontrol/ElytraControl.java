@@ -8,6 +8,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
 
@@ -23,9 +24,6 @@ public class ElytraControl implements ClientModInitializer {
     public static String playerUUID;
 
     private int elytraTime = 0;
-
-    private static final Text ELYTRA_ENABLED_TEXT = Text.translatable("message." + Constants.MOD_ID + ".elytra_enabled");
-    private static final Text ELYTRA_DISABLED_TEXT = Text.translatable("message." + Constants.MOD_ID + ".elytra_disabled");
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
@@ -47,7 +45,7 @@ public class ElytraControl implements ClientModInitializer {
 
             while (elytraToggleKey.wasPressed()) {
                 elytraToggle = !elytraToggle;
-                client.inGameHud.setOverlayMessage(elytraToggle ? ELYTRA_ENABLED_TEXT : ELYTRA_DISABLED_TEXT, false);
+                client.player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggle"), elytraToggle), true);
             }
 
             if (client.options.jumpKey.isPressed() && client.player.isFallFlying() && elytraTime > 10) {
