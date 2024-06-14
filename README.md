@@ -10,4 +10,5 @@ it's just simple mod to control your elytra, like enabling or disabling elytra a
 - Press space while in midair to cancel/stop flying in midair<br>
 ![Stop In MidAir Preview](https://i.imgur.com/23QXDQA.gif)
 ### Download
-Modrinth : [Modrinth](https://modrinth.com/mod/elytra-control)
+Modrinth : [Modrinth](https://modrinth.com/mod/elytra-control)<br>
+Curseforge : [Curseforge](https://www.curseforge.com/minecraft/mc-mods/elytra-control)
