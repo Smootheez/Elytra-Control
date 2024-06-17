@@ -3,5 +3,7 @@
 
   "message.elytracontrol.toggle": "Toggle Elytra",
 
-  "key.category.elytracontrol": "Elytra Control"
+  "key.category.elytracontrol": "Elytra Control",
+
+  "gui.elytracontrol.config.title": "Elytra Control Settings"
 }

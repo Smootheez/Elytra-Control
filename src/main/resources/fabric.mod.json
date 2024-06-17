@@ -18,6 +18,9 @@
   "entrypoints": {
     "client": [
       "net.smootheez.elytracontrol.ElytraControl"
+    ],
+    "modmenu" : [
+      "net.smootheez.elytracontrol.config.ModMenuApiImpl"
     ]
   },
   "mixins": [
