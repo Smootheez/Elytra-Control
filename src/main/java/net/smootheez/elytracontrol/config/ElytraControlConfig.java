@@ -9,11 +9,7 @@ import it.unimi.dsi.fastutil.objects.ObjectBidirectionalIterator;
 
 import net.fabricmc.loader.api.FabricLoader;
 
-import org.jetbrains.annotations.Nullable;
-
 import java.io.*;
-import java.util.Collections;
-import java.util.Map;
 
 public class ElytraControlConfig {
 

@@ -1,7 +1,6 @@
 package net.smootheez.elytracontrol.config;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.screen.ScreenTexts;
@@ -27,13 +26,13 @@ public class ElytraControlConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        Value<Boolean> elytraCancel = Value.of(config.elytraCancel, Value.Flag.RELOAD_WORLD_RENDERER);
         Value<Boolean> elytraLock = Value.of(config.elytraLock, Value.Flag.RELOAD_WORLD_RENDERER);
+        Value<Boolean> elytraCancel = Value.of(config.elytraCancel, Value.Flag.RELOAD_WORLD_RENDERER);
 
-        values = List.of(elytraCancel, elytraLock);
+        values = List.of(elytraLock, elytraCancel);
 
-        addDrawableChild(createBooleanValueButton(elytraCancel, width / 2 - 100 - 110, height / 2 - 10 - 12, 200, 20));
-        addDrawableChild(createBooleanValueButton(elytraLock,width / 2 - 100 + 110, height / 2 - 10 - 12, 200, 20));
+        addDrawableChild(createBooleanValueButton(elytraLock, width / 2 - 100 - 110, height / 2 - 10 - 12, 200, 20));
+        addDrawableChild(createBooleanValueButton(elytraCancel,width / 2 - 100 + 110, height / 2 - 10 - 12, 200, 20));
 
         addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE, button -> {
             saveValues();
@@ -46,6 +45,9 @@ public class ElytraControlConfigScreen extends Screen {
 
     @Override
     public void close() {
+        if (client == null){
+            return;
+        }
         client.setScreen(parent);
     }
 
