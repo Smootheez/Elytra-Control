@@ -5,5 +5,8 @@
 
   "key.category.elytracontrol": "Elytra Control",
 
-  "gui.elytracontrol.config.title": "Elytra Control Settings"
+  "gui.elytracontrol.config.title": "Elytra Control Settings",
+
+  "options.elytracontrol.elytra_cancel": "Elytra Cancel",
+  "options.elytracontrol.elytra_lock": "Elytra Lock"
 }

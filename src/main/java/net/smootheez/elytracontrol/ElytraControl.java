@@ -10,6 +10,7 @@ import net.minecraft.client.util.InputUtil;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.smootheez.elytracontrol.config.ElytraControlConfig;
 
 
 @Environment(EnvType.CLIENT)
@@ -22,8 +23,8 @@ public class ElytraControl implements ClientModInitializer {
     );
 
     public static String playerUUID;
-
     private int elytraTime = 0;
+
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
@@ -43,12 +44,12 @@ public class ElytraControl implements ClientModInitializer {
                 playerUUID = client.player.getUuidAsString();
             }
 
-            while (elytraToggleKey.wasPressed()) {
+            while (elytraToggleKey.wasPressed() && ElytraControlConfig.INSTANCE.elytraLock.get()) {
                 elytraToggle = !elytraToggle;
                 client.player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggle"), elytraToggle), true);
             }
 
-            if (client.options.jumpKey.isPressed() && client.player.isFallFlying() && elytraTime > 10) {
+            if (client.options.jumpKey.isPressed() && client.player.isFallFlying() && elytraTime > 10 && ElytraControlConfig.INSTANCE.elytraCancel.get()) {
                 client.player.stopFallFlying();
                 client.player.networkHandler.sendPacket(new ClientCommandC2SPacket(client.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
             }

@@ -2,6 +2,7 @@ package net.smootheez.elytracontrol.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.smootheez.elytracontrol.ElytraControl;
+import net.smootheez.elytracontrol.config.ElytraControlConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

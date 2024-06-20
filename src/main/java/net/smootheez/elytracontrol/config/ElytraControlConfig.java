@@ -26,10 +26,9 @@ public class ElytraControlConfig {
 
     protected final File file;
     protected final Object2ObjectLinkedOpenHashMap<String, Option<?>> optionMap = new Object2ObjectLinkedOpenHashMap<>();
-    protected final Map<String, Option<?>> optionMapView = Collections.unmodifiableMap(optionMap);
 
-    public final Option.BooleanOption elytraToggleConfig = addOption(new Option.BooleanOption("elytra_toggle_config", true));
     public final Option.BooleanOption elytraLock = addOption(new Option.BooleanOption("elytra_lock", true));
+    public final Option.BooleanOption elytraCancel = addOption(new Option.BooleanOption("elytra_cancel", true));
 
     public ElytraControlConfig(File file) {
         this.file = file;
@@ -91,51 +90,4 @@ public class ElytraControlConfig {
         }
         return option;
     }
-
-    @Nullable
-    public Option<?> getOption(String key){
-        return optionMap.get(key);
-    }
-
-    public Map<String, Option<?>> getOptionMapView(){
-        return optionMapView;
-    }
-
-//    public boolean elytraToggleConfig = true;
-//    public boolean elytraLock = true;
-//    public String helloWorld = "Hello World!";
-//
-//    public void saveConfig(){
-//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//        String json = gson.toJson(this);
-//        Path configPath = FabricLoader.getInstance().getConfigDir().resolve(Constants.MOD_ID + ".json");
-//        try (FileWriter writer = new FileWriter(configPath.toFile())){
-//            writer.write(json);
-//        } catch (IOException e) {
-//            Constants.LOGGER.error("Failed to save config");
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public void loadConfig() {
-//        Path configPath = FabricLoader.getInstance().getConfigDir().resolve(Constants.MOD_ID + ".json");
-//        if (!Files.exists(configPath)){
-//            try {
-//                Files.createFile(configPath);
-//                saveConfig();
-//            } catch (IOException e) {
-//                Constants.LOGGER.error("Failed to create config file");
-//                e.printStackTrace();
-//                return;
-//            }
-//        }
-//        try (Reader reader = Files.newBufferedReader(configPath)){
-//            ElytraControlConfig config = new Gson().fromJson(reader, ElytraControlConfig.class);
-//            this.elytraLock = config.elytraLock;
-//            this.elytraToggleConfig = config.elytraToggleConfig;
-//        } catch (IOException e) {
-//            Constants.LOGGER.error("Failed to read config");
-//            e.printStackTrace();
-//        }
-//    }
 }
