@@ -3,5 +3,8 @@
 
   "message.elytracontrol.toggle": "Toggle Elytra",
 
-  "key.category.elytracontrol": "Elytra Control"
+  "key.category.elytracontrol": "Elytra Control",
+
+  "options.elytracontrol.elytra_cancel": "Elytra Cancel",
+  "options.elytracontrol.elytra_lock": "Elytra Lock"
 }
