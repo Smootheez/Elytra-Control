@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.objects.ObjectBidirectionalIterator;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class ElytraControlConfig {
 
@@ -25,6 +26,7 @@ public class ElytraControlConfig {
 
     public final Option.BooleanOption elytraLock = addOption(new Option.BooleanOption("elytra_lock", true));
     public final Option.BooleanOption elytraCancel = addOption(new Option.BooleanOption("elytra_cancel", true));
+    public final Option.MultiOption multiValue = addOption(new Option.MultiOption("multi_value", Arrays.asList("option1", "option2", "option3"), "option1"));
 
     public ElytraControlConfig(File file) {
         this.file = file;

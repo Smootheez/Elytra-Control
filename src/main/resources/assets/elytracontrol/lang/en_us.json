@@ -6,5 +6,8 @@
   "key.category.elytracontrol": "Elytra Control",
 
   "options.elytracontrol.elytra_cancel": "Elytra Cancel",
-  "options.elytracontrol.elytra_lock": "Elytra Lock"
+  "options.elytracontrol.elytra_lock": "Elytra Lock",
+  "options.elytracontrol.title": "Elytra Control Config",
+
+  "notifier.elytracontrol.toggle": "Elytra Locked!"
 }
