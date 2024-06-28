@@ -9,5 +9,8 @@
   "options.elytracontrol.elytra_lock": "Elytra Lock",
   "options.elytracontrol.title": "Elytra Control Config",
 
+  "options.elytracontrol.elytra_cancel.tooltip": "Whether allowed to stop flying in mid air or not",
+  "options.elytracontrol.elytra_lock.tooltip": "Enable or Disable elytra lock feature",
+
   "notifier.elytracontrol.toggle": "Elytra Locked!"
 }

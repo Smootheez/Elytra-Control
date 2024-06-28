@@ -8,9 +8,9 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.ObjectBidirectionalIterator;
 
 import net.fabricmc.loader.api.FabricLoader;
+import net.smootheez.elytracontrol.config.option.BooleanOption;
 
 import java.io.*;
-import java.util.Arrays;
 
 public class ElytraControlConfig {
 
@@ -24,9 +24,8 @@ public class ElytraControlConfig {
     protected final File file;
     protected final Object2ObjectLinkedOpenHashMap<String, Option<?>> optionMap = new Object2ObjectLinkedOpenHashMap<>();
 
-    public final Option.BooleanOption elytraLock = addOption(new Option.BooleanOption("elytra_lock", true));
-    public final Option.BooleanOption elytraCancel = addOption(new Option.BooleanOption("elytra_cancel", true));
-    public final Option.MultiOption multiValue = addOption(new Option.MultiOption("multi_value", Arrays.asList("option1", "option2", "option3"), "option1"));
+    public final BooleanOption elytraLock = addOption(new BooleanOption("elytra_lock", true));
+    public final BooleanOption elytraCancel = addOption(new BooleanOption("elytra_cancel", true));
 
     public ElytraControlConfig(File file) {
         this.file = file;

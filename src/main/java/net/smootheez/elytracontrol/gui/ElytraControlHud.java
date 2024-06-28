@@ -6,16 +6,16 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import net.smootheez.elytracontrol.Constants;
-import net.smootheez.elytracontrol.ElytraControl;
+import net.smootheez.elytracontrol.handler.EndClientTickHandler;
 
 public class ElytraControlHud implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext drawContext, float tickDelta) {
         MinecraftClient client = MinecraftClient.getInstance();
         Identifier elytraLockTexture = new Identifier(Constants.MOD_ID, "textures/gui/elytra_lock.png");
-        Text elytraLockNotifier = Text.translatable("notifier.elytracontrol.toggle");
+        Text elytraLockNotifier = Text.translatable("notifier." + Constants.MOD_ID + ".toggle");
 
-        if (!ElytraControl.elytraToggle){
+        if (!EndClientTickHandler.elytraToggle){
             drawContext.drawTexture(elytraLockTexture,
                     client.getWindow().getScaledWidth() / 2 + 98, client.getWindow()
                             .getScaledHeight() - 19 , 0,0,16, 16,

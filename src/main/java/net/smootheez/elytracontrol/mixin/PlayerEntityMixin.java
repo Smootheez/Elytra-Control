@@ -1,8 +1,7 @@
 package net.smootheez.elytracontrol.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.smootheez.elytracontrol.ElytraControl;
-import net.smootheez.elytracontrol.config.ElytraControlConfig;
+import net.smootheez.elytracontrol.handler.EndClientTickHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -22,7 +21,7 @@ public class PlayerEntityMixin {
             offset = 12.0 / 16.0;
         }
 
-        if (doesCollideY(offset) && doesCollideY(-offset) || player.getUuidAsString().equals(ElytraControl.playerUUID) && !ElytraControl.elytraToggle) {
+        if (doesCollideY(offset) && doesCollideY(-offset) || player.getUuidAsString().equals(EndClientTickHandler.playerUUID) && !EndClientTickHandler.elytraToggle) {
             cir.setReturnValue(false);
         }
     }

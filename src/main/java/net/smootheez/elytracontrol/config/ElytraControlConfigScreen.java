@@ -3,6 +3,7 @@ package net.smootheez.elytracontrol.config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
@@ -26,13 +27,11 @@ public class ElytraControlConfigScreen extends Screen {
     protected void init() {
         Value<Boolean> elytraLock = Value.of(config.elytraLock, Value.Flag.RELOAD_WORLD_RENDERER);
         Value<Boolean> elytraCancel = Value.of(config.elytraCancel, Value.Flag.RELOAD_WORLD_RENDERER);
-        Value<String> multiValue = Value.of(config.multiValue, Value.Flag.RELOAD_WORLD_RENDERER);
 
         values = List.of(elytraLock, elytraCancel);
 
         addDrawableChild(createBooleanValueButton(elytraLock, width / 2 - 100 - 110, height / 2 - 10 - 12, 200, 20));
         addDrawableChild(createBooleanValueButton(elytraCancel,width / 2 - 100 + 110, height / 2 - 10 - 12, 200, 20));
-        addDrawableChild(createMultiOptionValueButton(multiValue, width / 2 - 100, height / 2 + 10, 200, 20));
 
         addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE, button -> {
             saveValues();
@@ -79,9 +78,14 @@ public class ElytraControlConfigScreen extends Screen {
         return "options." + Constants.MOD_ID + "." + optionKey;
     }
 
+    private static String getTooltipKey(String translationKey){
+        return translationKey + ".tooltip";
+    }
+
     private ButtonWidget createBooleanValueButton(Value<Boolean> value, int x, int y, int width, int height) {
         String translationKey = getTranslationKey(value.getOption().getKey());
         Text text = Text.translatable(translationKey);
+        String tooltipText = Text.translatable(getTooltipKey(translationKey)).getString();
         return ButtonWidget.builder(ScreenTexts.composeGenericOptionText(text, ScreenTexts.onOrOff(value.get())), (button) -> {
             boolean newValue = !value.get();
             value.set(newValue);
@@ -90,21 +94,7 @@ public class ElytraControlConfigScreen extends Screen {
                 valueText = valueText.copy().styled(style -> style.withBold(true));
             }
             button.setMessage(ScreenTexts.composeGenericOptionText(text, valueText));
-        }).dimensions(x, y, width, height).build();
-    }
-
-    private ButtonWidget createMultiOptionValueButton(Value<String> value, int x, int y, int width, int height) {
-        String translationKey = getTranslationKey(value.getOption().getKey());
-        Text text = Text.translatable(translationKey);
-        return ButtonWidget.builder(ScreenTexts.composeGenericOptionText(text, Text.of(value.get())), (button) -> {
-            ((Option.MultiOption) value.getOption()).nextOption();
-            String newValue = value.get();
-            Text valueText = Text.of(newValue);
-            if (value.isChanged()) {
-                valueText = valueText.copy().styled(style -> style.withBold(true));
-            }
-            button.setMessage(ScreenTexts.composeGenericOptionText(text, valueText));
-        }).dimensions(x, y, width, height).build();
+        }).dimensions(x, y, width, height).tooltip(Tooltip.of(Text.of(tooltipText))).build();
     }
 
     private static class Value<T> {
