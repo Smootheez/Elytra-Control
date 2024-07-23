@@ -39,7 +39,7 @@ public class EndClientTickHandler implements ClientTickEvents.EndTick {
     private void toggleElytraIfKeyPressed(MinecraftClient client){
         while (ElytraControl.elytraToggleKey.wasPressed() && ElytraControlConfig.INSTANCE.elytraLock.get()) {
             elytraToggle = !elytraToggle;
-            client.player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggle"), elytraToggle), false);
+            client.player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggle"), elytraToggle), true);
         }
     }
 

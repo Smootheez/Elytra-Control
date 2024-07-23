@@ -37,9 +37,8 @@ public class ElytraControlConfigScreen extends Screen {
             saveValues();
             close();
         }).dimensions(this.width / 2 - 75 + 79, this.height - 40, 150, 20).build());
-        addDrawableChild(ButtonWidget.builder(ScreenTexts.CANCEL, button -> {
-            close();
-        }).dimensions(this.width / 2 - 75 - 79, this.height - 40, 150, 20).build());
+
+        addDrawableChild(ButtonWidget.builder(ScreenTexts.CANCEL, button -> close()).dimensions(this.width / 2 - 75 - 79, this.height - 40, 150, 20).build());
     }
 
     @Override

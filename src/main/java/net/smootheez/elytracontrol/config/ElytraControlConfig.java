@@ -16,14 +16,15 @@ public class ElytraControlConfig {
 
     protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    protected final File file;
+    protected final Object2ObjectLinkedOpenHashMap<String, Option<?>> optionMap = new Object2ObjectLinkedOpenHashMap<>();
+
     public static final ElytraControlConfig INSTANCE = new ElytraControlConfig(FabricLoader.getInstance().getConfigDir().resolve(Constants.MOD_ID + ".json").toFile());
     static {
         INSTANCE.loadConfig();
     }
 
-    protected final File file;
-    protected final Object2ObjectLinkedOpenHashMap<String, Option<?>> optionMap = new Object2ObjectLinkedOpenHashMap<>();
-
+    //entry values
     public final BooleanOption elytraLock = addOption(new BooleanOption("elytra_lock", true));
     public final BooleanOption elytraCancel = addOption(new BooleanOption("elytra_cancel", true));
 
@@ -44,7 +45,7 @@ public class ElytraControlConfig {
 
     public void saveConfig(){
         try (FileWriter writer = new FileWriter(file)){
-            GSON.toJson(toJson(), writer);
+            GSON.toJson(this.toJson(), writer);
         } catch (Exception e){
             Constants.LOGGER.error("Could not save config to file.", e);
         }
@@ -83,7 +84,7 @@ public class ElytraControlConfig {
     protected <T extends Option<?>> T addOption(T option){
         Option<?> old = optionMap.put(option.getKey(), option);
         if (old != null){
-            Constants.LOGGER.warn("Option with key {} was overridden", old.getKey());
+            Constants.LOGGER.warn("Option with key {} was overridden", option.getKey());
         }
         return option;
     }
