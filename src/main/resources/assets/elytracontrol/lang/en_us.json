@@ -5,12 +5,27 @@
 
   "key.category.elytracontrol": "Elytra Control",
 
-  "options.elytracontrol.elytra_cancel": "Elytra Cancel",
-  "options.elytracontrol.elytra_lock": "Elytra Lock",
-  "options.elytracontrol.title": "Elytra Control Config",
+  "category.elytracontrol.funOptionsCategory": "Fun Category",
 
-  "options.elytracontrol.elytra_cancel.tooltip": "Whether allowed to stop flying in mid air or not",
-  "options.elytracontrol.elytra_lock.tooltip": "Enable or Disable elytra lock feature",
+  "options.elytracontrol.elytraCancel": "Elytra Cancel",
+  "options.elytracontrol.elytraLock": "Elytra Lock",
+  "options.elytracontrol.wingFlapSpeed": "Wing Flap Speed",
+  "options.elytracontrol.minVelocity": "Minimum Velocity",
+  "options.elytracontrol.maxVelocity": "Maximum Velocity",
+  "options.elytracontrol.flapAmplitude": "Flap Amplitude",
+  "options.elytracontrol.subtleFlapFactor": "Subtle Flap Factor",
+  "options.elytracontrol.funOptions": "Fun Options",
+  "options.elytracontrol.showLockIcon": "Show Lock Icon",
+
+  "elytracontrol.title": "Elytra Control Config",
+
+  "options.elytracontrol.elytraCancel.description": "Whether allowed to stop flying in mid air or not",
+  "options.elytracontrol.elytraLock.description": "Enable or Disable elytra lock feature",
+  "options.elytracontrol.wingFlapSpeed.description": "Adjust the rate at which the Elytra's wings flap.",
+  "options.elytracontrol.minVelocity.description": "Set the minimal velocity to start and stop elytra from flapping.",
+  "options.elytracontrol.maxVelocity.description": "Set the maximal velocity to stop and start elytra from flapping.",
+  "options.elytracontrol.flapAmplitude.description": "Control the extent of the Elytra's wing flapping motion, influencing lift, drag, and overall aerodynamic characteristics.",
+  "options.elytracontrol.subtleFlapFactor.description": "Fine-tune the Elytra's wing flapping pattern, adjusting the subtle nuances of its motion to optimize stability, responsiveness, and overall flight feel.",
 
   "notifier.elytracontrol.toggle": "Elytra Locked!"
 }

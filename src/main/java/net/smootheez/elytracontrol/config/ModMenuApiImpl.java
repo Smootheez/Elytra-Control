@@ -5,6 +5,6 @@ import com.terraformersmc.modmenu.api.ModMenuApi;
 
 public class ModMenuApiImpl implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return parent -> new ElytraControlConfigScreen(parent, ElytraControlConfig.INSTANCE);
+        return ElytraControlScreen::new;
     }
 }

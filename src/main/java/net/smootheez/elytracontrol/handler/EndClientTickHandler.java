@@ -28,7 +28,7 @@ public class EndClientTickHandler implements ClientTickEvents.EndTick {
 
         toggleElytraIfKeyPressed(client);
 
-        if (keyJump.isPressed() && fallFlyingEntity && elytraTime > 10 && ElytraControlConfig.INSTANCE.elytraCancel.get()){
+        if (keyJump.isPressed() && fallFlyingEntity && elytraTime > 10 && ElytraControlConfig.getInstance().getElytraCancel().getValue()){
             stopFlying(client);
         }
 
@@ -37,7 +37,7 @@ public class EndClientTickHandler implements ClientTickEvents.EndTick {
     }
 
     private void toggleElytraIfKeyPressed(MinecraftClient client){
-        while (ElytraControl.elytraToggleKey.wasPressed() && ElytraControlConfig.INSTANCE.elytraLock.get()) {
+        while (ElytraControl.elytraToggleKey.wasPressed() && ElytraControlConfig.getInstance().getElytraLock().getValue()) {
             elytraToggle = !elytraToggle;
             client.player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggle"), elytraToggle), true);
         }

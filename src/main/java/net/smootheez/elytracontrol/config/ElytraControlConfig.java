@@ -1,91 +1,67 @@
 package net.smootheez.elytracontrol.config;
 
-import net.smootheez.elytracontrol.Constants;
+import net.smootheez.scl.annotation.Config;
+import net.smootheez.scl.api.ConfigProvider;
+import net.smootheez.scl.option.ConfigOption;
 
-import com.google.gson.*;
-import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.ObjectBidirectionalIterator;
+@Config("elytracontrol")
+public class ElytraControlConfig implements ConfigProvider {
+    private static final ElytraControlConfig INSTANCE = new ElytraControlConfig();
+    private final String FUN_CATEGORY = "funOptionsCategory";
 
-import net.fabricmc.loader.api.FabricLoader;
-import net.smootheez.elytracontrol.config.option.BooleanOption;
+    private final ConfigOption<Boolean> elytraLock = ConfigOption.create("elytraLock", true);
+    private final ConfigOption<Boolean> elytraCancel = ConfigOption.create("elytraCancel", true);
+    private final ConfigOption<Boolean> funOptions = ConfigOption.create("funOptions", false);
+    private final ConfigOption<Boolean> showLockIcon = ConfigOption.create("showLockIcon", true);
 
-import java.io.*;
+    @Config.Category(FUN_CATEGORY)
+    private final ConfigOption<Double> wingFlapSpeed = ConfigOption.create("wingFlapSpeed", 0.3, Double.MIN_VALUE, Double.MAX_VALUE);
+    @Config.Category(FUN_CATEGORY)
+    private final ConfigOption<Double> minVelocity = ConfigOption.create("minVelocity", 0.6, Double.MIN_VALUE, Double.MAX_VALUE);
+    @Config.Category(FUN_CATEGORY)
+    private final ConfigOption<Double> maxVelocity = ConfigOption.create("maxVelocity", 1.8, Double.MIN_VALUE, Double.MAX_VALUE);
+    @Config.Category(FUN_CATEGORY)
+    private final ConfigOption<Double> flapAmplitude = ConfigOption.create("flapAmplitude", 0.5, Double.MIN_VALUE, Double.MAX_VALUE);
+    @Config.Category(FUN_CATEGORY)
+    private final ConfigOption<Double> subtleFlapFactor = ConfigOption.create("subtleFlapFactor", 0.2, Double.MIN_VALUE, Double.MAX_VALUE);
 
-public class ElytraControlConfig {
-
-    protected static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
-    protected final File file;
-    protected final Object2ObjectLinkedOpenHashMap<String, Option<?>> optionMap = new Object2ObjectLinkedOpenHashMap<>();
-
-    public static final ElytraControlConfig INSTANCE = new ElytraControlConfig(FabricLoader.getInstance().getConfigDir().resolve(Constants.MOD_ID + ".json").toFile());
-    static {
-        INSTANCE.loadConfig();
+    public ConfigOption<Boolean> getShowLockIcon() {
+        return showLockIcon;
     }
 
-    //entry values
-    public final BooleanOption elytraLock = addOption(new BooleanOption("elytra_lock", true));
-    public final BooleanOption elytraCancel = addOption(new BooleanOption("elytra_cancel", true));
-
-    public ElytraControlConfig(File file) {
-        this.file = file;
+    public ConfigOption<Boolean> getFunOptions() {
+        return funOptions;
     }
 
-    public void loadConfig(){
-        if (file.exists()){
-            try (FileReader reader = new FileReader(file)){
-                fromJson(JsonParser.parseReader(reader));
-            } catch (Exception e){
-                Constants.LOGGER.error("Could not load config from file.", e);
-            }
-        }
-        saveConfig();
+    public ConfigOption<Double> getMinVelocity() {
+        return minVelocity;
     }
 
-    public void saveConfig(){
-        try (FileWriter writer = new FileWriter(file)){
-            GSON.toJson(this.toJson(), writer);
-        } catch (Exception e){
-            Constants.LOGGER.error("Could not save config to file.", e);
-        }
+    public ConfigOption<Double> getMaxVelocity() {
+        return maxVelocity;
     }
 
-    protected void fromJson(JsonElement json) throws JsonParseException{
-        if (json.isJsonObject()){
-            JsonObject object = json.getAsJsonObject();
-            ObjectBidirectionalIterator<Object2ObjectMap.Entry<String, Option<?>>> iterator = optionMap.object2ObjectEntrySet().fastIterator();
-            while (iterator.hasNext()){
-                Object2ObjectMap.Entry<String, Option<?>> entry = iterator.next();
-                JsonElement element = object.get(entry.getKey());
-                if (element != null){
-                    try {
-                        entry.getValue().fromJson(element);
-                    } catch (JsonParseException e){
-                        Constants.LOGGER.error("Could not parse json for option {}", entry.getKey(), e);
-                    }
-                }
-            }
-        } else {
-            throw new JsonParseException("Json must be object");
-        }
+    public ConfigOption<Double> getFlapAmplitude() {
+        return flapAmplitude;
     }
 
-    protected JsonElement toJson(){
-        JsonObject object = new JsonObject();
-        ObjectBidirectionalIterator<Object2ObjectMap.Entry<String, Option<?>>> iterator = optionMap.object2ObjectEntrySet().fastIterator();
-        while (iterator.hasNext()){
-            Object2ObjectMap.Entry<String, Option<?>> entry = iterator.next();
-            object.add(entry.getKey(), entry.getValue().toJson());
-        }
-        return object;
+    public ConfigOption<Double> getSubtleFlapFactor() {
+        return subtleFlapFactor;
     }
 
-    protected <T extends Option<?>> T addOption(T option){
-        Option<?> old = optionMap.put(option.getKey(), option);
-        if (old != null){
-            Constants.LOGGER.warn("Option with key {} was overridden", option.getKey());
-        }
-        return option;
+    public ConfigOption<Double> getWingFlapSpeed() {
+        return wingFlapSpeed;
+    }
+
+    public ConfigOption<Boolean> getElytraLock() {
+        return elytraLock;
+    }
+
+    public ConfigOption<Boolean> getElytraCancel() {
+        return elytraCancel;
+    }
+
+    public static ElytraControlConfig getInstance() {
+        return INSTANCE;
     }
 }

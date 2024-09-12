@@ -8,8 +8,10 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.smootheez.elytracontrol.config.ElytraControlConfig;
 import net.smootheez.elytracontrol.gui.ElytraControlHud;
 import net.smootheez.elytracontrol.handler.EndClientTickHandler;
+import net.smootheez.scl.registry.ConfigRegister;
 
 
 @Environment(EnvType.CLIENT)
@@ -22,6 +24,7 @@ public class ElytraControl implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
+        ConfigRegister.getInstance().register(ElytraControlConfig.getInstance());
 
         KeyBindingHelper.registerKeyBinding(elytraToggleKey);
         HudRenderCallback.EVENT.register(new ElytraControlHud());

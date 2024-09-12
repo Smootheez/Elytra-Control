@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.model.ElytraEntityModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.smootheez.elytracontrol.config.ElytraControlConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -20,11 +21,11 @@ public class ElytraEntityModelMixin<T extends LivingEntity> {
     @Shadow @Final private ModelPart rightWing;
     @Shadow @Final private ModelPart leftWing;
 
-    @Unique private static final float MIN_VELOCITY = 0.6f;
-    @Unique private static final float MAX_VELOCITY = 1.8f;
-    @Unique private static final float FLAP_SPEED = 0.3f;
-    @Unique private static final float FLAP_AMPLITUDE = 0.5f;
-    @Unique private static final float SUBTLE_FLAP_FACTOR = 0.2f;
+    @Unique private static final float MIN_VELOCITY = ElytraControlConfig.getInstance().getMinVelocity().getValue().floatValue();
+    @Unique private static final float MAX_VELOCITY = ElytraControlConfig.getInstance().getMaxVelocity().getValue().floatValue();
+    @Unique private static final float FLAP_SPEED = ElytraControlConfig.getInstance().getWingFlapSpeed().getValue().floatValue();
+    @Unique private static final float FLAP_AMPLITUDE = ElytraControlConfig.getInstance().getFlapAmplitude().getValue().floatValue();
+    @Unique private static final float SUBTLE_FLAP_FACTOR = ElytraControlConfig.getInstance().getSubtleFlapFactor().getValue().floatValue();
 
     @Unique
     private float calculateFlapAngle(float tickDelta, float velocity) {
@@ -56,7 +57,12 @@ public class ElytraEntityModelMixin<T extends LivingEntity> {
         float yaw = 0.0f;
         float pivotY = 0.0f;
 
-        float flapAngle = livingEntity.isFallFlying() ? calculateFlapAngle(ageInTicks, (float) livingEntity.getVelocity().length()) : 0.0f;
+        float flapAngle;
+        if (livingEntity.isFallFlying() && ElytraControlConfig.getInstance().getFunOptions().getValue()) {
+            flapAngle = calculateFlapAngle(ageInTicks, (float) livingEntity.getVelocity().length());
+        } else {
+            flapAngle = 0.0f;
+        }
 
         if (livingEntity.isFallFlying()) {
             float fallFactor = calculateFallFactor(livingEntity.getVelocity());
