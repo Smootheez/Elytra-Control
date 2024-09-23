@@ -1,10 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.smootheez.elytracontrol.mixin",
+  "package": "dev.smootheez.elytracontrol.mixin",
   "compatibilityLevel": "JAVA_17",
-  "mixins": [
-  ],
   "client": [
     "ElytraEntityModelMixin",
     "PlayerEntityMixin"

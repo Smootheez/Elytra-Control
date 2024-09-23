@@ -1,13 +1,13 @@
-package net.smootheez.elytracontrol.gui;
+package dev.smootheez.elytracontrol.gui;
 
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import net.smootheez.elytracontrol.Constants;
-import net.smootheez.elytracontrol.config.ElytraControlConfig;
-import net.smootheez.elytracontrol.handler.EndClientTickHandler;
+import dev.smootheez.elytracontrol.Constants;
+import dev.smootheez.elytracontrol.config.ElytraControlConfig;
+import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
 
 public class ElytraControlHud implements HudRenderCallback {
     @Override

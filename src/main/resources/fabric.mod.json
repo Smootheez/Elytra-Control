@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "id": "elytracontrol",
+  "id": "${modid}",
   "version": "${version}",
-  "name": "Elytra Control",
+  "name": "${mod_name}",
   "description": "Control Your Elytra",
   "authors": [
     "Smootheez"
@@ -17,10 +17,10 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "net.smootheez.elytracontrol.ElytraControl"
+      "dev.smootheez.elytracontrol.ElytraControl"
     ],
     "modmenu" : [
-      "net.smootheez.elytracontrol.config.ModMenuApiImpl"
+      "dev.smootheez.elytracontrol.config.ModMenuApiImpl"
     ]
   },
   "mixins": [

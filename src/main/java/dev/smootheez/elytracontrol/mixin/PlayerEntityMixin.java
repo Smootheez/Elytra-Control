@@ -1,7 +1,7 @@
-package net.smootheez.elytracontrol.mixin;
+package dev.smootheez.elytracontrol.mixin;
 
 import net.minecraft.entity.player.PlayerEntity;
-import net.smootheez.elytracontrol.handler.EndClientTickHandler;
+import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

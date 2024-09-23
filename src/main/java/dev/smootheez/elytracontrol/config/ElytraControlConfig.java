@@ -1,8 +1,8 @@
-package net.smootheez.elytracontrol.config;
+package dev.smootheez.elytracontrol.config;
 
-import net.smootheez.scl.annotation.Config;
-import net.smootheez.scl.api.ConfigProvider;
-import net.smootheez.scl.option.ConfigOption;
+import dev.smootheez.scl.annotation.Config;
+import dev.smootheez.scl.api.ConfigProvider;
+import dev.smootheez.scl.option.ConfigOption;
 
 @Config("elytracontrol")
 public class ElytraControlConfig implements ConfigProvider {
