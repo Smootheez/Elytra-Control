@@ -1,4 +1,4 @@
-package net.smootheez.elytracontrol.mixin;
+package dev.smootheez.elytracontrol.mixin;
 
 import net.minecraft.client.model.ModelPart;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.model.ElytraEntityModel;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
-import net.smootheez.elytracontrol.config.ElytraControlConfig;
+import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;

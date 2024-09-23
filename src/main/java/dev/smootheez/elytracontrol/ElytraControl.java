@@ -1,4 +1,4 @@
-package net.smootheez.elytracontrol;
+package dev.smootheez.elytracontrol;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
@@ -8,10 +8,10 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.smootheez.elytracontrol.config.ElytraControlConfig;
-import net.smootheez.elytracontrol.gui.ElytraControlHud;
-import net.smootheez.elytracontrol.handler.EndClientTickHandler;
-import net.smootheez.scl.registry.ConfigRegister;
+import dev.smootheez.elytracontrol.config.ElytraControlConfig;
+import dev.smootheez.elytracontrol.gui.ElytraControlHud;
+import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
+import dev.smootheez.scl.registry.ConfigRegister;
 
 
 @Environment(EnvType.CLIENT)

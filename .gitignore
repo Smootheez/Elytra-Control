@@ -118,3 +118,4 @@ run/
 !gradle-wrapper.jar
 /.codiumai/local_index.json
 /.codiumai/
+/local.properties

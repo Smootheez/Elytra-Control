@@ -1,13 +1,13 @@
-package net.smootheez.elytracontrol.config;
+package dev.smootheez.elytracontrol.config;
 
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
-import net.smootheez.elytracontrol.Constants;
-import net.smootheez.scl.gui.widget.AutoConfigListWidget;
-import net.smootheez.scl.registry.ConfigRegister;
+import dev.smootheez.elytracontrol.Constants;
+import dev.smootheez.scl.gui.widget.AutoConfigListWidget;
+import dev.smootheez.scl.registry.ConfigRegister;
 
 public class ElytraControlScreen extends Screen {
     private final Screen parent;
@@ -19,7 +19,7 @@ public class ElytraControlScreen extends Screen {
 
     @Override
     protected void init() {
-        addDrawableChild(new AutoConfigListWidget(this.client, ElytraControlConfig.getInstance(), Constants.MOD_ID));
+        addDrawableChild(new AutoConfigListWidget(ElytraControlConfig.getInstance(), Constants.MOD_ID));
         addDrawableChild(ButtonWidget.builder(ScreenTexts.CANCEL, button -> close()).dimensions(this.width / 2 + 5, this.height - 27, 150, 20).build());
 
         addDrawableChild(ButtonWidget.builder(ScreenTexts.DONE, button -> {
