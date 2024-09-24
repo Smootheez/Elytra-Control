@@ -72,7 +72,7 @@ modrinth {
     versionName = "${project.mod_name} ${project.mod_version}"
     versionType = 'release'
     uploadFile = remapJar
-    gameVersions = ["1.20.4"]
+    gameVersions = ['1.20.5', '1.20.6']
     loaders = ['fabric']
     dependencies {
         required.project 'fabric-api'
@@ -85,7 +85,9 @@ curseforge {
     project {
         id = '1020221'
         releaseType = 'release'
-        addGameVersion project.minecraft_version
+        addGameVersion '1.20.5'
+        addGameVersion '1.20.6'
+
         addGameVersion 'Fabric'
         addGameVersion 'Java 17'
 
@@ -100,7 +102,7 @@ curseforge {
     }
 }
 
-tasks.register('publishToModSites') {
-    publishToModSites.dependsOn modrinth
-    publishToModSites.dependsOn curseforge
+tasks.register('publishMod') {
+    dependsOn 'modrinth', 'curseforge'
+    group = 'publishing'
 }
