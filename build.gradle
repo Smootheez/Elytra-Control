@@ -2,6 +2,7 @@ plugins {
     id 'fabric-loom' version '1.7-SNAPSHOT'
     id 'maven-publish'
     id 'com.modrinth.minotaur' version '2.+'
+    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 version = project.mod_version
@@ -66,15 +67,40 @@ java {
 
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
-    projectId = "7lCr5INB"
+    projectId = '7lCr5INB'
     versionNumber = project.mod_version
-    versionName = "${project.mod_name}-${project.mod_version}"
-    versionType = "release"
+    versionName = "${project.mod_name} ${project.mod_version}"
+    versionType = 'release'
     uploadFile = remapJar
     gameVersions = ["1.20.4"]
-    loaders = ["fabric"]
+    loaders = ['fabric']
     dependencies {
-        required.project "fabric-api"
-        required.project "smootheez-config-lib"
+        required.project 'fabric-api'
+        required.project 'smootheez-config-lib'
     }
+}
+
+curseforge {
+    apiKey = "${System.getenv("CURSEFORGE_TOKEN")}"
+    project {
+        id = '1020221'
+        releaseType = 'release'
+        addGameVersion project.minecraft_version
+        addGameVersion 'Fabric'
+        addGameVersion 'Java 17'
+
+        relations {
+            requiredDependency 'fabric-api'
+            requiredDependency 'smootheez-config-lib'
+        }
+
+        mainArtifact(remapJar) {
+            displayName = "${project.mod_name} ${project.mod_version}"
+        }
+    }
+}
+
+tasks.register('publishToModSites') {
+    publishToModSites.dependsOn modrinth
+    publishToModSites.dependsOn curseforge
 }
