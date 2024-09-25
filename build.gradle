@@ -72,7 +72,7 @@ modrinth {
     versionName = "${project.mod_name} ${project.mod_version}"
     versionType = 'release'
     uploadFile = remapJar
-    gameVersions = ['1.20.5', '1.20.6']
+    gameVersions = ['1.21', '1.21.1']
     loaders = ['fabric']
     dependencies {
         required.project 'fabric-api'
@@ -85,11 +85,11 @@ curseforge {
     project {
         id = '1020221'
         releaseType = 'release'
-        addGameVersion '1.20.5'
-        addGameVersion '1.20.6'
+        addGameVersion '1.21'
+        addGameVersion '1.21.1'
 
         addGameVersion 'Fabric'
-        addGameVersion 'Java 17'
+        addGameVersion 'Java 21'
 
         relations {
             requiredDependency 'fabric-api'
