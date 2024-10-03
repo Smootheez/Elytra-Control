@@ -1,5 +1,7 @@
 package dev.smootheez.elytracontrol.mixin;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
 import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+@Environment(EnvType.CLIENT)
 @Mixin(PlayerEntity.class)
 public class PlayerEntityMixin {
     @Inject(method = "checkFallFlying", at = @At("HEAD"), cancellable = true)
