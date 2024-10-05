@@ -3,7 +3,7 @@ package dev.smootheez.elytracontrol.mixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
-import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
+import dev.smootheez.elytracontrol.event.EndTickEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ public class PlayerEntityMixin {
             offset = 12.0 / 16.0;
         }
 
-        if (doesCollideY(offset) && doesCollideY(-offset) || player.getUuidAsString().equals(EndClientTickHandler.playerUUID) && !EndClientTickHandler.elytraToggle) {
+        if (doesCollideY(offset) && doesCollideY(-offset) || player.getUuidAsString().equals(EndTickEvent.playerUUID) && !EndTickEvent.elytraToggle) {
             cir.setReturnValue(false);
         }
     }

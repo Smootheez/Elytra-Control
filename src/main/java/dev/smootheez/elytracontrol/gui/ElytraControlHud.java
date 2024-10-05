@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import dev.smootheez.elytracontrol.Constants;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
-import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
+import dev.smootheez.elytracontrol.event.EndTickEvent;
 
 public class ElytraControlHud implements HudRenderCallback {
     @Override
@@ -17,7 +17,7 @@ public class ElytraControlHud implements HudRenderCallback {
         Identifier elytraLockTexture = Identifier.of(Constants.MOD_ID, "textures/gui/elytra_lock.png");
         Text elytraLockNotifier = Text.translatable("notifier." + Constants.MOD_ID + ".toggle");
 
-        if (!EndClientTickHandler.elytraToggle && ElytraControlConfig.getInstance().getShowLockIcon().getValue()) {
+        if (!EndTickEvent.elytraToggle && ElytraControlConfig.getInstance().getShowLockIcon().getValue()) {
             drawContext.drawTexture(elytraLockTexture,
                     client.getWindow().getScaledWidth() / 2 + 98, client.getWindow()
                             .getScaledHeight() - 19, 0, 0, 16, 16,

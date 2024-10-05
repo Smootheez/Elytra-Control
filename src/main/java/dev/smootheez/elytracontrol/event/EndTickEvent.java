@@ -1,5 +1,6 @@
-package dev.smootheez.elytracontrol.handler;
+package dev.smootheez.elytracontrol.event;
 
+import dev.smootheez.elytracontrol.handler.EasyFlightHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
@@ -9,10 +10,11 @@ import net.minecraft.text.Text;
 import dev.smootheez.elytracontrol.Constants;
 import dev.smootheez.elytracontrol.ElytraControl;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
+import net.minecraft.util.Hand;
 
 import java.util.Random;
 
-public class EndClientTickHandler implements ClientTickEvents.EndTick {
+public class EndTickEvent implements ClientTickEvents.EndTick {
     public static boolean elytraToggle = true;
     public static String playerUUID;
     private int elytraTime = 0;
@@ -38,6 +40,8 @@ public class EndClientTickHandler implements ClientTickEvents.EndTick {
         }
 
         updateElytraFlyingTime(client);
+
+        EasyFlightHandler.easyFlight(client);
 
     }
 

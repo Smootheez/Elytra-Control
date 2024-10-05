@@ -13,6 +13,7 @@ public class ElytraControlConfig implements ConfigProvider {
     private final ConfigOption<Boolean> elytraCancel = ConfigOption.create("elytraCancel", true);
     private final ConfigOption<Boolean> funOptions = ConfigOption.create("funOptions", false);
     private final ConfigOption<Boolean> showLockIcon = ConfigOption.create("showLockIcon", true);
+    private final ConfigOption<Boolean> easyFlight = ConfigOption.create("easyFlight", false);
 
     @Config.Category(FUN_CATEGORY)
     private final ConfigOption<Double> wingFlapSpeed = ConfigOption.create("wingFlapSpeed", 0.3, Double.MIN_VALUE, Double.MAX_VALUE);
@@ -63,5 +64,9 @@ public class ElytraControlConfig implements ConfigProvider {
 
     public static ElytraControlConfig getInstance() {
         return INSTANCE;
+    }
+
+    public ConfigOption<Boolean> getEasyFlight() {
+        return easyFlight;
     }
 }

@@ -10,7 +10,7 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 import dev.smootheez.elytracontrol.gui.ElytraControlHud;
-import dev.smootheez.elytracontrol.handler.EndClientTickHandler;
+import dev.smootheez.elytracontrol.event.EndTickEvent;
 import dev.smootheez.scl.registry.ConfigRegister;
 
 
@@ -21,13 +21,15 @@ public class ElytraControl implements ClientModInitializer {
             InputUtil.GLFW_KEY_V,
             "key.category.elytracontrol"
     );
+
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
         ConfigRegister.getInstance().register(ElytraControlConfig.getInstance());
 
         KeyBindingHelper.registerKeyBinding(elytraToggleKey);
+
         HudRenderCallback.EVENT.register(new ElytraControlHud());
-        ClientTickEvents.END_CLIENT_TICK.register(new EndClientTickHandler());
+        ClientTickEvents.END_CLIENT_TICK.register(new EndTickEvent());
     }
 }
