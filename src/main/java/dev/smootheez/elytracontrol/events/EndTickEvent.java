@@ -1,4 +1,4 @@
-package dev.smootheez.elytracontrol.event;
+package dev.smootheez.elytracontrol.events;
 
 import dev.smootheez.elytracontrol.handler.EasyFlightHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -10,7 +10,6 @@ import net.minecraft.text.Text;
 import dev.smootheez.elytracontrol.Constants;
 import dev.smootheez.elytracontrol.ElytraControl;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
-import net.minecraft.util.Hand;
 
 import java.util.Random;
 

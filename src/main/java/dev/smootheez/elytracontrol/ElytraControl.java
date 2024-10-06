@@ -10,14 +10,14 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 import dev.smootheez.elytracontrol.gui.ElytraControlHud;
-import dev.smootheez.elytracontrol.event.EndTickEvent;
+import dev.smootheez.elytracontrol.events.EndTickEvent;
 import dev.smootheez.scl.registry.ConfigRegister;
 
 
 @Environment(EnvType.CLIENT)
 public class ElytraControl implements ClientModInitializer {
     public static final KeyBinding elytraToggleKey = new KeyBinding(
-            "key." + Constants.MOD_ID + ".elytra_toggle",
+            "key." + Constants.MOD_ID + ".elytraToggle",
             InputUtil.GLFW_KEY_V,
             "key.category.elytracontrol"
     );

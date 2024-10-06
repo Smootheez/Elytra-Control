@@ -3,7 +3,7 @@ package dev.smootheez.elytracontrol.mixin;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.player.PlayerEntity;
-import dev.smootheez.elytracontrol.event.EndTickEvent;
+import dev.smootheez.elytracontrol.events.EndTickEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

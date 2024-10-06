@@ -8,7 +8,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import dev.smootheez.elytracontrol.Constants;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
-import dev.smootheez.elytracontrol.event.EndTickEvent;
+import dev.smootheez.elytracontrol.events.EndTickEvent;
 
 public class ElytraControlHud implements HudRenderCallback {
     @Override
