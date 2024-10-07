@@ -24,11 +24,14 @@ public class ElytraEntityModelMixin<T extends LivingEntity> {
     @Shadow @Final private ModelPart rightWing;
     @Shadow @Final private ModelPart leftWing;
 
-    @Unique private static final float MIN_VELOCITY = ElytraControlConfig.getInstance().getMinVelocity().getValue().floatValue();
-    @Unique private static final float MAX_VELOCITY = ElytraControlConfig.getInstance().getMaxVelocity().getValue().floatValue();
-    @Unique private static final float FLAP_SPEED = ElytraControlConfig.getInstance().getWingFlapSpeed().getValue().floatValue();
-    @Unique private static final float FLAP_AMPLITUDE = ElytraControlConfig.getInstance().getFlapAmplitude().getValue().floatValue();
-    @Unique private static final float SUBTLE_FLAP_FACTOR = ElytraControlConfig.getInstance().getSubtleFlapFactor().getValue().floatValue();
+    @Unique
+    private static final ElytraControlConfig config = ElytraControlConfig.getInstance();
+
+    @Unique private static final float MIN_VELOCITY = config.getMinVelocity().getValue().floatValue();
+    @Unique private static final float MAX_VELOCITY = config.getMaxVelocity().getValue().floatValue();
+    @Unique private static final float FLAP_SPEED = config.getWingFlapSpeed().getValue().floatValue();
+    @Unique private static final float FLAP_AMPLITUDE = config.getFlapAmplitude().getValue().floatValue();
+    @Unique private static final float SUBTLE_FLAP_FACTOR = config.getSubtleFlapFactor().getValue().floatValue();
 
     @Unique
     private float calculateFlapAngle(float tickDelta, float velocity) {
@@ -61,7 +64,7 @@ public class ElytraEntityModelMixin<T extends LivingEntity> {
         float pivotY = 0.0f;
 
         float flapAngle;
-        if (livingEntity.isFallFlying() && ElytraControlConfig.getInstance().getFunOptions().getValue()) {
+        if (livingEntity.isFallFlying() && config.getFunOptions().getValue()) {
             flapAngle = calculateFlapAngle(ageInTicks, (float) livingEntity.getVelocity().length());
         } else {
             flapAngle = 0.0f;

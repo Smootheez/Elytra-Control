@@ -15,7 +15,7 @@ public class ElytraControlHud implements HudRenderCallback {
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
         MinecraftClient client = MinecraftClient.getInstance();
         Identifier elytraLockTexture = Identifier.of(Constants.MOD_ID, "textures/gui/elytra_lock.png");
-        Text elytraLockNotifier = Text.translatable("notifier." + Constants.MOD_ID + ".toggle");
+        Text elytraLockNotifier = Text.translatable("notifier." + Constants.MOD_ID + ".toggleElytraLock");
 
         if (!EndTickEvent.elytraToggle && ElytraControlConfig.getInstance().getShowLockIcon().getValue()) {
             drawContext.drawTexture(elytraLockTexture,

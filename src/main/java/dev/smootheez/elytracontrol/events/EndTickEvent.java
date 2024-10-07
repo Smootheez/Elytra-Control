@@ -3,6 +3,7 @@ package dev.smootheez.elytracontrol.events;
 import dev.smootheez.elytracontrol.handler.EasyFlightHandler;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.screen.ScreenTexts;
@@ -15,8 +16,10 @@ import java.util.Random;
 
 public class EndTickEvent implements ClientTickEvents.EndTick {
     public static boolean elytraToggle = true;
+    public static boolean easyFlightToggle = true;
     public static String playerUUID;
     private int elytraTime = 0;
+    private final ElytraControlConfig config = ElytraControlConfig.getInstance();
 
     @Override
     public void onEndTick(MinecraftClient client) {
@@ -32,31 +35,41 @@ public class EndTickEvent implements ClientTickEvents.EndTick {
             playerUUID = client.player.getUuidAsString();
         }
 
-        toggleElytraIfKeyPressed(client);
+        toggleElytraIfKeyPressed(client.player);
+        isEasyFlightKeyPressed(client.player);
 
-        if (keyJump.isPressed() && fallFlyingEntity && elytraTime > randomNumber && ElytraControlConfig.getInstance().getElytraCancel().getValue()) {
-            stopFlying(client);
+        if (keyJump.wasPressed() && fallFlyingEntity && elytraTime > randomNumber && config.getElytraCancel().getValue()) {
+            stopFlying(client.player);
         }
 
         updateElytraFlyingTime(client);
 
-        EasyFlightHandler.easyFlight(client);
+        EasyFlightHandler.handleEasyFlight(client);
 
     }
 
-    private void toggleElytraIfKeyPressed(MinecraftClient client) {
-        while (ElytraControl.elytraToggleKey.wasPressed() && ElytraControlConfig.getInstance().getElytraLock().getValue()) {
-            elytraToggle = !elytraToggle;
-            client.player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggle"), elytraToggle), true);
+    private void isEasyFlightKeyPressed(ClientPlayerEntity player) {
+        while (config.getEasyFlight().getValue() && ElytraControl.easyFlightToggleKey.wasPressed()) {
+            easyFlightToggle = !easyFlightToggle;
+            player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleEasyFlight"), easyFlightToggle), true);
         }
     }
 
-    private void stopFlying(MinecraftClient client) {
-        client.player.stopFallFlying();
-        client.player.networkHandler.sendPacket(new ClientCommandC2SPacket(client.player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
+    private void toggleElytraIfKeyPressed(ClientPlayerEntity player) {
+        while (ElytraControl.elytraToggleKey.wasPressed() && config.getElytraLock().getValue()) {
+            elytraToggle = !elytraToggle;
+            player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleElytraLock"), elytraToggle), true);
+        }
+    }
+
+    private void stopFlying(ClientPlayerEntity player) {
+        player.stopFallFlying();
+        player.networkHandler.sendPacket(new ClientCommandC2SPacket(player, ClientCommandC2SPacket.Mode.START_FALL_FLYING));
     }
 
     private void updateElytraFlyingTime(MinecraftClient client) {
+        if (client.player == null) return;
+
         if (client.player.isFallFlying() && !client.options.jumpKey.isPressed()) {
             elytraTime = (elytraTime + 1) % 1000;
         } else {

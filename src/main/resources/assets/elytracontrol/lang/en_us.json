@@ -1,7 +1,9 @@
 {
   "key.elytracontrol.elytraToggle": "Toggle Elytra",
+  "key.elytracontrol.easyFlightToggle": "Toggle Easy Flight",
 
-  "message.elytracontrol.toggle": "Toggle Elytra",
+  "message.elytracontrol.toggleElytraLock": "Toggle Elytra",
+  "message.elytracontrol.toggleEasyFlight": "Toggle Easy Flight",
 
   "key.category.elytracontrol": "Elytra Control",
 
@@ -29,5 +31,5 @@
   "options.elytracontrol.subtleFlapFactor.description": "Fine-tune the Elytra's wing flapping pattern, adjusting the subtle nuances of its motion to optimize stability, responsiveness, and overall flight feel.",
   "options.elytracontrol.easyFlight.description": "Make elytra to start flying easier, with just right click while holding fireworks (right hand/left hand)",
 
-  "notifier.elytracontrol.toggle": "Elytra Locked!"
+  "notifier.elytracontrol.toggleElytraLock": "Elytra Locked!"
 }

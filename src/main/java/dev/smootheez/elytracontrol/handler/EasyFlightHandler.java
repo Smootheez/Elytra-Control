@@ -13,91 +13,123 @@ import net.minecraft.util.hit.HitResult;
 
 public class EasyFlightHandler {
 
-    private static final int FIRST_JUMP_DURATION = 1;
-    private static final int SECOND_JUMP_DELAY = 1;
-    private static final int SECOND_JUMP_DURATION = 1;
-    private static final int USE_KEY_DELAY = 1;
-    private static final int USE_KEY_DURATION = 1;
+    private static final int FIRST_JUMP_TICKS = 1;
+    private static final int SECOND_JUMP_DELAY_TICKS = 1;
+    private static final int SECOND_JUMP_TICKS = 1;
+    private static final int USE_KEY_DELAY_TICKS = 1;
+    private static final int USE_KEY_TICKS = 1;
 
-    private static boolean isDoubleJumping = false;
-    private static int tickCounter = 0;
-    private static boolean wasUseKeyPressed = false;
+    private static boolean isFlightSequenceActive = false;
+    private static int currentTick = 0;
+    private static boolean wasUseKeyPreviouslyPressed = false;
 
-    public static void easyFlight(MinecraftClient client) {
+    public static void handleEasyFlight(MinecraftClient client) {
         if (client.player == null) return;
 
-        boolean isUseKeyPressed = client.options.useKey.isPressed();
+        boolean isUseKeyCurrentlyPressed = client.options.useKey.isPressed();
 
-        if (!isDoubleJumping) {
-            if (isUseKeyPressed && !wasUseKeyPressed && shouldInitiateEasyFlight(client)) {
-                startDoubleJump(client);
+        if (!isFlightSequenceActive) {
+            if (isUseKeyCurrentlyPressed && !wasUseKeyPreviouslyPressed && canInitiateFlight(client)) {
+                startFlightSequence(client);
             }
         } else {
-            executeDoubleJumpSequence(client);
+            continueFlightSequence(client);
         }
 
-        wasUseKeyPressed = isUseKeyPressed;
+        wasUseKeyPreviouslyPressed = isUseKeyCurrentlyPressed;
     }
 
-    private static boolean shouldInitiateEasyFlight(MinecraftClient client) {
+    private static boolean canInitiateFlight(MinecraftClient client) {
         if (client.player == null || client.interactionManager == null) return false;
 
-        boolean hasElytra = client.player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem;
+        boolean isWearingElytra = client.player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem;
         return EndTickEvent.elytraToggle && ElytraControlConfig.getInstance().getEasyFlight().getValue()
                 && !client.player.isFallFlying() && client.player.isOnGround()
-                && isValidFireworkHolding(client.player) && hasElytra
-                && crosshairCheck(client) && !client.interactionManager.getCurrentGameMode().isCreative();
+                && isHoldingFirework(client.player) && isWearingElytra
+                && isCrosshairClear(client) && !client.interactionManager.getCurrentGameMode().isCreative()
+                && EndTickEvent.easyFlightToggle && !client.player.isTouchingWater();
     }
 
-    private static void startDoubleJump(MinecraftClient client) {
-        isDoubleJumping = true;
-        tickCounter = 0;
+    private static void startFlightSequence(MinecraftClient client) {
+        isFlightSequenceActive = true;
+        currentTick = 0;
         client.options.useKey.setPressed(false);
     }
 
-    private static void executeDoubleJumpSequence(MinecraftClient client) {
-        tickCounter++;
-        int totalDuration = FIRST_JUMP_DURATION + SECOND_JUMP_DELAY + SECOND_JUMP_DURATION + USE_KEY_DELAY + USE_KEY_DURATION;
+    private static void continueFlightSequence(MinecraftClient client) {
+        currentTick++;
+        int totalSequenceTicks = calculateTotalSequenceTicks();
 
-        if (tickCounter <= FIRST_JUMP_DURATION ||
-                (tickCounter == FIRST_JUMP_DURATION + SECOND_JUMP_DELAY + SECOND_JUMP_DURATION)) {
-            client.options.jumpKey.setPressed(true);
-        } else if (tickCounter == totalDuration - USE_KEY_DURATION) {
-            client.options.useKey.setPressed(true);
-        } else if (tickCounter > totalDuration) {
-            resetDoubleJump(client);
+        if (isFirstJumpPhase()) {
+            pressJumpKey(client);
+        } else if (isSecondJumpPhase()) {
+            pressJumpKey(client);
+        } else if (isUseKeyPhase(totalSequenceTicks)) {
+            pressUseKey(client);
+        } else if (isSequenceComplete(totalSequenceTicks)) {
+            resetFlightSequence(client);
         } else {
-            client.options.jumpKey.setPressed(false);
-            client.options.useKey.setPressed(false);
+            releaseKeys(client);
         }
     }
 
-    private static void resetDoubleJump(MinecraftClient client) {
-        isDoubleJumping = false;
+    private static int calculateTotalSequenceTicks() {
+        return FIRST_JUMP_TICKS + SECOND_JUMP_DELAY_TICKS + SECOND_JUMP_TICKS + USE_KEY_DELAY_TICKS + USE_KEY_TICKS;
+    }
+
+    private static boolean isFirstJumpPhase() {
+        return currentTick <= FIRST_JUMP_TICKS;
+    }
+
+    private static boolean isSecondJumpPhase() {
+        return currentTick == FIRST_JUMP_TICKS + SECOND_JUMP_DELAY_TICKS + SECOND_JUMP_TICKS;
+    }
+
+    private static boolean isUseKeyPhase(int totalSequenceTicks) {
+        return currentTick == totalSequenceTicks - USE_KEY_TICKS;
+    }
+
+    private static boolean isSequenceComplete(int totalSequenceTicks) {
+        return currentTick > totalSequenceTicks;
+    }
+
+    private static void pressJumpKey(MinecraftClient client) {
+        client.options.jumpKey.setPressed(true);
+    }
+
+    private static void pressUseKey(MinecraftClient client) {
+        client.options.useKey.setPressed(true);
+    }
+
+    private static void releaseKeys(MinecraftClient client) {
         client.options.jumpKey.setPressed(false);
         client.options.useKey.setPressed(false);
     }
 
-    private static boolean isValidFireworkHolding(ClientPlayerEntity player) {
+    private static void resetFlightSequence(MinecraftClient client) {
+        isFlightSequenceActive = false;
+        releaseKeys(client);
+    }
+
+    private static boolean isHoldingFirework(ClientPlayerEntity player) {
         ItemStack mainHand = player.getMainHandStack();
         ItemStack offHand = player.getOffHandStack();
 
         return mainHand.getItem() instanceof FireworkRocketItem || offHand.getItem() instanceof FireworkRocketItem;
     }
 
-    private static boolean crosshairCheck(MinecraftClient client) {
+    private static boolean isCrosshairClear(MinecraftClient client) {
         HitResult hitResult = client.crosshairTarget;
 
         if (client.player == null) return false;
 
         ItemStack itemStack = client.player.getStackInHand(client.player.getActiveHand());
 
-        TypedActionResult<ItemStack> typedActionResult = itemStack.use(client.world, client.player, client.player.getActiveHand());
+        TypedActionResult<ItemStack> actionResult = itemStack.use(client.world, client.player, client.player.getActiveHand());
 
-        boolean isUsingItem = typedActionResult.getResult().isAccepted();
+        boolean isUsingItem = actionResult.getResult().isAccepted();
+        boolean isSwingingHand = client.player.handSwinging;
 
-        boolean isSwingHand = client.player.handSwinging;
-
-        return hitResult == null || hitResult.getType() == HitResult.Type.MISS && !isUsingItem && !isSwingHand;
+        return hitResult == null || hitResult.getType() == HitResult.Type.MISS && !isUsingItem && !isSwingingHand;
     }
 }

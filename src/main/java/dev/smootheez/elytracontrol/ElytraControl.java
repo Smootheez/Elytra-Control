@@ -22,12 +22,19 @@ public class ElytraControl implements ClientModInitializer {
             "key.category.elytracontrol"
     );
 
+    public static final KeyBinding easyFlightToggleKey = new KeyBinding(
+            "key." + Constants.MOD_ID + ".easyFlightToggle",
+            InputUtil.UNKNOWN_KEY.getCode(),
+            "key.category.elytracontrol"
+    );
+
     @Override
     public void onInitializeClient() {
         Constants.LOGGER.info("Elytra Control Initialized");
         ConfigRegister.getInstance().register(ElytraControlConfig.getInstance());
 
         KeyBindingHelper.registerKeyBinding(elytraToggleKey);
+        KeyBindingHelper.registerKeyBinding(easyFlightToggleKey);
 
         HudRenderCallback.EVENT.register(new ElytraControlHud());
         ClientTickEvents.END_CLIENT_TICK.register(new EndTickEvent());
