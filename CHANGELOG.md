@@ -1,0 +1,3 @@
+- Fixed some translation to make it more consistent
+- Added easy flight option (disable by default in config option)
+- Added easy flight keybind (no keybind by default, can change it through settings)

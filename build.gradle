@@ -74,6 +74,7 @@ modrinth {
     uploadFile = remapJar
     gameVersions = ['1.21', '1.21.1']
     loaders = ['fabric']
+    changelog = file('CHANGELOG.md').text
     dependencies {
         required.project 'fabric-api'
         required.project 'smootheez-config-lib'
@@ -85,6 +86,7 @@ curseforge {
     project {
         id = '1020221'
         releaseType = 'release'
+        changelog = file('CHANGELOG.md').text
         addGameVersion '1.21'
         addGameVersion '1.21.1'
 
