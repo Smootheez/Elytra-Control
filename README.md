@@ -18,6 +18,6 @@ it's just simple mod to control your elytra, like enabling or disabling elytra a
 ### Toggle Easy Flight Button Preview
 - You can also toggle the easy flight (no keybind by default, you can change it on settings).<br>
 ![Easy Flight Toggle Preview](https://i.imgur.com/XRl09VM.gif)
-### Download
+## Download
 Modrinth : [Modrinth](https://modrinth.com/mod/elytra-control)<br>
 Curseforge : [Curseforge](https://www.curseforge.com/minecraft/mc-mods/elytra-control)
