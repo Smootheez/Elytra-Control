@@ -4,7 +4,6 @@
   "package": "dev.smootheez.elytracontrol.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
-    "ElytraEntityModelMixin",
     "PlayerEntityMixin"
   ],
   "injectors": {

@@ -2,15 +2,18 @@ package dev.smootheez.elytracontrol.handler;
 
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 import dev.smootheez.elytracontrol.events.EndTickEvent;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.TypedActionResult;
+import net.minecraft.item.Items;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.HitResult;
 
+@Environment(EnvType.CLIENT)
 public class EasyFlightHandler {
 
     private static final int FIRST_JUMP_TICKS = 1;
@@ -42,9 +45,9 @@ public class EasyFlightHandler {
     private static boolean canInitiateFlight(MinecraftClient client) {
         if (client.player == null || client.interactionManager == null) return false;
 
-        boolean isWearingElytra = client.player.getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem;
+        boolean isWearingElytra = client.player.getEquippedStack(EquipmentSlot.CHEST).getItem() == Items.ELYTRA;
         return EndTickEvent.elytraToggle && ElytraControlConfig.getInstance().getEasyFlight().getValue()
-                && !client.player.isFallFlying() && client.player.isOnGround()
+                && !client.player.isGliding() && client.player.isOnGround()
                 && isHoldingFirework(client.player) && isWearingElytra
                 && isCrosshairClear(client) && !client.interactionManager.getCurrentGameMode().isCreative()
                 && EndTickEvent.easyFlightToggle && !client.player.isTouchingWater();
@@ -125,9 +128,9 @@ public class EasyFlightHandler {
 
         ItemStack itemStack = client.player.getStackInHand(client.player.getActiveHand());
 
-        TypedActionResult<ItemStack> actionResult = itemStack.use(client.world, client.player, client.player.getActiveHand());
+        ActionResult actionResult = itemStack.use(client.world, client.player, client.player.getActiveHand());
 
-        boolean isUsingItem = actionResult.getResult().isAccepted();
+        boolean isUsingItem = actionResult.isAccepted();
         boolean isSwingingHand = client.player.handSwinging;
 
         return hitResult == null || hitResult.getType() == HitResult.Type.MISS && !isUsingItem && !isSwingingHand;

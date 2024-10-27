@@ -1,5 +1,7 @@
 package dev.smootheez.elytracontrol.config;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
@@ -9,6 +11,7 @@ import dev.smootheez.elytracontrol.Constants;
 import dev.smootheez.scl.gui.widget.AutoConfigListWidget;
 import dev.smootheez.scl.registry.ConfigRegister;
 
+@Environment(EnvType.CLIENT)
 public class ElytraControlScreen extends Screen {
     private final Screen parent;
 

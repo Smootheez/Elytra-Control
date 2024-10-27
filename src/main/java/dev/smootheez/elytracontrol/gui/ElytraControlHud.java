@@ -1,8 +1,11 @@
 package dev.smootheez.elytracontrol.gui;
 
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
@@ -10,6 +13,7 @@ import dev.smootheez.elytracontrol.Constants;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 import dev.smootheez.elytracontrol.events.EndTickEvent;
 
+@Environment(EnvType.CLIENT)
 public class ElytraControlHud implements HudRenderCallback {
     @Override
     public void onHudRender(DrawContext drawContext, RenderTickCounter renderTickCounter) {
@@ -18,7 +22,7 @@ public class ElytraControlHud implements HudRenderCallback {
         Text elytraLockNotifier = Text.translatable("notifier." + Constants.MOD_ID + ".toggleElytraLock");
 
         if (!EndTickEvent.elytraToggle && ElytraControlConfig.getInstance().getShowLockIcon().getValue()) {
-            drawContext.drawTexture(elytraLockTexture,
+            drawContext.drawTexture(RenderLayer::getGuiTextured, elytraLockTexture,
                     client.getWindow().getScaledWidth() / 2 + 98, client.getWindow()
                             .getScaledHeight() - 19, 0, 0, 16, 16,
                     16, 16);
