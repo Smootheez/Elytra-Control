@@ -1,6 +1,7 @@
-package dev.smootheez.elytracontrol.events;
+package dev.smootheez.elytracontrol.event;
 
 import dev.smootheez.elytracontrol.handler.EasyFlightHandler;
+import dev.smootheez.elytracontrol.registry.KeyBinds;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -11,7 +12,6 @@ import net.minecraft.network.packet.c2s.play.ClientCommandC2SPacket;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 import dev.smootheez.elytracontrol.Constants;
-import dev.smootheez.elytracontrol.ElytraControl;
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 
 import java.util.Random;
@@ -52,14 +52,14 @@ public class EndTickEvent implements ClientTickEvents.EndTick {
     }
 
     private void isEasyFlightKeyPressed(ClientPlayerEntity player) {
-        while (config.getEasyFlight().getValue() && ElytraControl.easyFlightToggleKey.wasPressed()) {
+        while (config.getEasyFlight().getValue() && KeyBinds.easyFlightToggleKey.wasPressed()) {
             easyFlightToggle = !easyFlightToggle;
             player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleEasyFlight"), easyFlightToggle), true);
         }
     }
 
     private void toggleElytraIfKeyPressed(ClientPlayerEntity player) {
-        while (ElytraControl.elytraToggleKey.wasPressed() && config.getElytraLock().getValue()) {
+        while (KeyBinds.elytraToggleKey.wasPressed() && config.getElytraLock().getValue()) {
             elytraToggle = !elytraToggle;
             player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleElytraLock"), elytraToggle), true);
         }

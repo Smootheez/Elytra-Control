@@ -8,6 +8,6 @@ import net.fabricmc.api.Environment;
 @Environment(EnvType.CLIENT)
 public class ModMenuApiImpl implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return ElytraControlScreen::new;
+        return ElytraControlConfigScreen::new;
     }
 }

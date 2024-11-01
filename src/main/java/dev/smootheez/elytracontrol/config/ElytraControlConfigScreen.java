@@ -12,10 +12,10 @@ import dev.smootheez.scl.gui.widget.AutoConfigListWidget;
 import dev.smootheez.scl.registry.ConfigRegister;
 
 @Environment(EnvType.CLIENT)
-public class ElytraControlScreen extends Screen {
+public class ElytraControlConfigScreen extends Screen {
     private final Screen parent;
 
-    protected ElytraControlScreen(Screen screen) {
+    protected ElytraControlConfigScreen(Screen screen) {
         super(Text.translatable("elytracontrol.title"));
         this.parent = screen;
     }

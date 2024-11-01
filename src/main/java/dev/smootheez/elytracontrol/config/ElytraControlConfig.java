@@ -1,5 +1,6 @@
 package dev.smootheez.elytracontrol.config;
 
+import dev.smootheez.elytracontrol.config.option.LockIconMode;
 import dev.smootheez.scl.annotation.Config;
 import dev.smootheez.scl.api.ConfigProvider;
 import dev.smootheez.scl.option.ConfigOption;
@@ -10,11 +11,11 @@ public class ElytraControlConfig implements ConfigProvider {
 
     private final ConfigOption<Boolean> elytraLock = ConfigOption.create("elytraLock", true);
     private final ConfigOption<Boolean> elytraCancel = ConfigOption.create("elytraCancel", true);
-    private final ConfigOption<Boolean> showLockIcon = ConfigOption.create("showLockIcon", true);
+    private final ConfigOption<LockIconMode> lockIconMode = ConfigOption.create("iconLockMode", LockIconMode.ICON_TEXT);
     private final ConfigOption<Boolean> easyFlight = ConfigOption.create("easyFlight", false);
 
-    public ConfigOption<Boolean> getShowLockIcon() {
-        return showLockIcon;
+    public ConfigOption<LockIconMode> getLockIconMode() {
+        return lockIconMode;
     }
 
     public ConfigOption<Boolean> getElytraLock() {

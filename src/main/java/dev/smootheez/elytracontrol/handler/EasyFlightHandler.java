@@ -1,7 +1,7 @@
 package dev.smootheez.elytracontrol.handler;
 
 import dev.smootheez.elytracontrol.config.ElytraControlConfig;
-import dev.smootheez.elytracontrol.events.EndTickEvent;
+import dev.smootheez.elytracontrol.event.EndTickEvent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
