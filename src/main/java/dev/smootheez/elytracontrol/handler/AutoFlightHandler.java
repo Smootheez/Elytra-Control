@@ -12,8 +12,8 @@ import net.minecraft.util.math.Vec3d;
 public class AutoFlightHandler {
     private static final float UP_PITCH = -40.0F;
     private static final float DOWN_PITCH = 38.0F;
-    private static final double MIN_VELOCITY = 0.3588;
-    private static final double MAX_VELOCITY = 1.9;
+    private static final double MIN_VELOCITY = 0.3588;  // Adjusted from 0.3588
+    private static final double MAX_VELOCITY = 1.8941;  // Adjusted from 1.8941
     private static final float PITCH_ADJUSTMENT_SPEED = 2.0F;
     private static boolean isAdjustingPitch = false;
     private static float targetPitch = 0.0F;
@@ -22,7 +22,7 @@ public class AutoFlightHandler {
         PlayerEntity player = client.player;
         if (player == null) return;
 
-        if (KeyBinds.lookingKey.wasPressed()) isAdjustingPitch = !isAdjustingPitch;
+        if (KeyBinds.autoFlightKey.wasPressed()) isAdjustingPitch = !isAdjustingPitch;
 
         if (isAdjustingPitch && player.isGliding()) {
             Vec3d velocity = player.getVelocity();
