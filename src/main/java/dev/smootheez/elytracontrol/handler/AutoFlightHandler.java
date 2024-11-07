@@ -1,5 +1,6 @@
 package dev.smootheez.elytracontrol.handler;
 
+import dev.smootheez.elytracontrol.config.ElytraControlConfig;
 import dev.smootheez.elytracontrol.registry.KeyBinds;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -12,9 +13,10 @@ import net.minecraft.util.math.Vec3d;
 public class AutoFlightHandler {
     private static final float UP_PITCH = -40.0F;
     private static final float DOWN_PITCH = 38.0F;
-    private static final double MIN_VELOCITY = 0.3588;  // Adjusted from 0.3588
+    private static final double MIN_VELOCITY = 0.3589;  // Adjusted from 0.3588
     private static final double MAX_VELOCITY = 1.8941;  // Adjusted from 1.8941
-    private static final float PITCH_ADJUSTMENT_SPEED = 2.0F;
+    private static final double PITCH_ADJUSTMENT_SPEED = ElytraControlConfig.getInstance().getAdjustPitch().getValue(); // Default value 2.0F
+
     private static boolean isAdjustingPitch = false;
     private static float targetPitch = 0.0F;
 
@@ -38,7 +40,7 @@ public class AutoFlightHandler {
             float pitchDiff = targetPitch - currentPitch;
 
             if (Math.abs(pitchDiff) > 0.01F) {
-                float adjustment = Math.signum(pitchDiff) * PITCH_ADJUSTMENT_SPEED;
+                float adjustment = Math.signum(pitchDiff) * (float) PITCH_ADJUSTMENT_SPEED;
                 float newPitch = currentPitch + adjustment;
 
                 if (targetPitch > currentPitch) {
@@ -50,8 +52,8 @@ public class AutoFlightHandler {
                 player.setPitch(newPitch);
             }
 
-            player.sendMessage(Text.of(String.format("Speed: %.2f | Pitch: %.2f | Target: %.2f",
-                    speed, player.getPitch(), targetPitch)), false);
+            player.sendMessage(Text.of(String.format("Speed: %.2f | Pitch: %.2f | Target: %.2f | Height: %.2f",
+                    speed, player.getPitch(), targetPitch, player.getY())), false);
         }
     }
 }

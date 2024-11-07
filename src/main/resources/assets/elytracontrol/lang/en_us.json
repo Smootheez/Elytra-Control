@@ -9,10 +9,11 @@
 
   "options.elytracontrol.elytraCancel": "Elytra Cancel",
   "options.elytracontrol.elytraLock": "Elytra Lock",
-  "options.elytracontrol.iconLockModeNONE": "None",
-  "options.elytracontrol.iconLockModeICON_ONLY": "Icon Only",
-  "options.elytracontrol.iconLockModeTEXT_ONLY": "Text Only",
-  "options.elytracontrol.iconLockModeICON_TEXT": "Icon and Text",
+  "options.elytracontrol.iconLockMode": "Icon Lock Mode",
+  "options.elytracontrol.iconLockMode.none": "None",
+  "options.elytracontrol.iconLockMode.iconOnly": "Icon Only",
+  "options.elytracontrol.iconLockMode.textOnly": "Text Only",
+  "options.elytracontrol.iconLockMode.iconText": "Icon and Text",
   "options.elytracontrol.easyFlight": "Easy Flight",
 
   "elytracontrol.title": "Elytra Control Config",

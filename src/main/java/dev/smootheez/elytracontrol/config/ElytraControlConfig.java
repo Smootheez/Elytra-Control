@@ -14,6 +14,12 @@ public class ElytraControlConfig implements ConfigProvider {
     private final ConfigOption<LockIconMode> lockIconMode = ConfigOption.create("iconLockMode", LockIconMode.ICON_TEXT);
     private final ConfigOption<Boolean> easyFlight = ConfigOption.create("easyFlight", false);
 
+    private final ConfigOption<Double> adjustPitch = ConfigOption.create("adjustPitch", 2.0, 0.0, 4.0);
+
+    public ConfigOption<Double> getAdjustPitch() {
+        return adjustPitch;
+    }
+
     public ConfigOption<LockIconMode> getLockIconMode() {
         return lockIconMode;
     }

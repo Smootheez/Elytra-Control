@@ -2,12 +2,14 @@ package dev.smootheez.elytracontrol.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import dev.smootheez.scl.gui.screen.AutoScreen;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.text.Text;
 
 @Environment(EnvType.CLIENT)
 public class ModMenuApiImpl implements ModMenuApi {
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
-        return ElytraControlConfigScreen::new;
+        return parent -> new AutoScreen(Text.translatable("elytracontrol.title"), parent, ElytraControlConfig.getInstance());
     }
 }
