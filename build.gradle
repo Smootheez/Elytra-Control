@@ -2,7 +2,6 @@ plugins {
     id 'fabric-loom' version '1.8-SNAPSHOT'
     id 'maven-publish'
     id 'com.modrinth.minotaur' version '2.+'
-    id 'com.matthewprenger.cursegradle' version '1.4.0'
 }
 
 version = project.mod_version
@@ -79,32 +78,4 @@ modrinth {
         required.project 'fabric-api'
         required.project 'smootheez-config-lib'
     }
-}
-
-curseforge {
-    apiKey = "${System.getenv("CURSEFORGE_TOKEN")}"
-    project {
-        id = '1020221'
-        releaseType = 'release'
-        changelog = file('CHANGELOG.md').text
-        addGameVersion '1.21.2'
-        addGameVersion '1.21.3'
-
-        addGameVersion 'Fabric'
-        addGameVersion 'Java 21'
-
-        relations {
-            requiredDependency 'fabric-api'
-            requiredDependency 'smootheez-config-lib'
-        }
-
-        mainArtifact(remapJar) {
-            displayName = "${project.mod_name} ${project.mod_version}"
-        }
-    }
-}
-
-tasks.register('publishMod') {
-    dependsOn 'modrinth', 'curseforge'
-    group = 'publishing'
 }
