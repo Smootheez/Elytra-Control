@@ -58,14 +58,16 @@ public class EndTickEvent implements ClientTickEvents.EndTick {
     private void isEasyFlightKeyPressed(PlayerEntity player) {
         while (config.getEasyFlight().getValue() && KeyBinds.easyFlightToggleKey.wasPressed()) {
             easyFlightToggle = !easyFlightToggle;
-            player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleEasyFlight"), easyFlightToggle), true);
+            if (config.getEasyFlightMessage().getValue())
+                player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleEasyFlight"), easyFlightToggle), true);
         }
     }
 
     private void toggleElytraIfKeyPressed(PlayerEntity player) {
         while (KeyBinds.elytraToggleKey.wasPressed() && config.getElytraLock().getValue()) {
             elytraToggle = !elytraToggle;
-            player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleElytraLock"), elytraToggle), true);
+            if (config.getElytraLockMessage().getValue())
+                player.sendMessage(ScreenTexts.composeToggleText(Text.translatable("message." + Constants.MOD_ID + ".toggleElytraLock"), elytraToggle), true);
         }
     }
 
