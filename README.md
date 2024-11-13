@@ -9,7 +9,7 @@ it's just simple mod to control your elytra, like enabling or disabling elytra a
 ### Stop In MidAir Preview
 - Press space while in midair to cancel/stop flying in midair.<br>
 ![Stop In MidAir Preview](https://i.imgur.com/23QXDQA.gif)
-### Fun Option Enable Preview
+### ~~Fun Option Enable Preview~~ (removed for the newest version for now)
 - Makes your elytra have flap animation (disable by default in config option).<br>
 ![Fun Option Enable Preview](https://i.imgur.com/3aEm2Bb.gif)
 ### Easy Flight Action
