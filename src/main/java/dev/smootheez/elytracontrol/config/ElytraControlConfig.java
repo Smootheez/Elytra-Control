@@ -16,10 +16,15 @@ public class ElytraControlConfig implements ConfigProvider {
     private final ConfigOption<Boolean> easyFlightMessage = ConfigOption.create("easyFlightMessage", true);
     private final ConfigOption<Boolean> elytraLockMessage = ConfigOption.create("elytraLockMessage", true);
 
-    private final ConfigOption<Double> adjustPitch = ConfigOption.create("adjustPitch", 2.0, 0.0, 4.0);
+    private final ConfigOption<Double> pitchUpSpeed = ConfigOption.create("pitchUpSpeed", 2.3, 0.1, 4.0);
+    private final ConfigOption<Double> pitchDownSpeed = ConfigOption.create("pitchDownSpeed", 2.0, 0.1, 4.0);
 
-    public ConfigOption<Double> getAdjustPitch() {
-        return adjustPitch;
+    public static ElytraControlConfig getInstance() {
+        return INSTANCE;
+    }
+
+    public ConfigOption<Double> getPitchDownSpeed() {
+        return pitchDownSpeed;
     }
 
     public ConfigOption<LockIconMode> getLockIconMode() {
@@ -46,7 +51,7 @@ public class ElytraControlConfig implements ConfigProvider {
         return elytraLockMessage;
     }
 
-    public static ElytraControlConfig getInstance() {
-        return INSTANCE;
+    public ConfigOption<Double> getPitchUpSpeed() {
+        return pitchUpSpeed;
     }
 }

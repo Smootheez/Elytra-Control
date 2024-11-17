@@ -17,6 +17,8 @@
   "options.elytracontrol.iconLockMode.iconOnly": "Icon Only",
   "options.elytracontrol.iconLockMode.textOnly": "Text Only",
   "options.elytracontrol.iconLockMode.iconText": "Icon and Text",
+  "options.elytracontrol.pitchUpSpeed": "Ajust Pitch Up Speed",
+  "options.elytracontrol.pitchDownSpeed": "Ajust Pitch Down Speed",
 
   "elytracontrol.title": "Elytra Control Config",
 

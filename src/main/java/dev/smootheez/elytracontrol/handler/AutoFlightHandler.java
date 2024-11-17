@@ -27,14 +27,13 @@ public class AutoFlightHandler {
 
         handleAutoFlightToggle();
 
-        if (isAdjustingPitch && player.isGliding()) {
-            processAutoFlight(player);
-        }
+        if (isAdjustingPitch && player.isGliding()) processAutoFlight(player);
     }
 
     private static void handleAutoFlightToggle() {
         if (KeyBinds.autoFlightKey.wasPressed()) {
             isAdjustingPitch = !isAdjustingPitch;
+            if (isAdjustingPitch) targetPitch = DOWN_PITCH;
         }
     }
 
@@ -53,26 +52,24 @@ public class AutoFlightHandler {
     }
 
     private static void updateTargetPitch(double speed) {
-        if (speed <= MIN_VELOCITY) {
-            targetPitch = DOWN_PITCH;
-        } else if (speed >= MAX_VELOCITY) {
-            targetPitch = UP_PITCH;
-        }
+        if (speed <= MIN_VELOCITY) targetPitch = DOWN_PITCH;
+        else if (speed >= MAX_VELOCITY) targetPitch = UP_PITCH;
     }
 
     private static void adjustPlayerPitch(PlayerEntity player, float currentPitch) {
-        double pitchAdjustmentSpeed = config.getAdjustPitch().getValue();
+        double pitchAdjustmentSpeedUp = config.getPitchUpSpeed().getValue();
+        double pitchAdjustmentSpeedDown = config.getPitchDownSpeed().getValue();
         float pitchDiff = targetPitch - currentPitch;
 
         if (Math.abs(pitchDiff) > 0.01F) {
-            float adjustment = Math.signum(pitchDiff) * (float) pitchAdjustmentSpeed;
-            float newPitch = currentPitch + adjustment;
+            float adjustment;
+            if (pitchDiff > 0) adjustment = (float) pitchAdjustmentSpeedDown;
+            else adjustment = (float) pitchAdjustmentSpeedUp;
 
-            if (targetPitch > currentPitch) {
-                newPitch = Math.min(newPitch, targetPitch);
-            } else {
-                newPitch = Math.max(newPitch, targetPitch);
-            }
+            float newPitch = currentPitch + Math.signum(pitchDiff) * adjustment;
+
+            if (targetPitch > currentPitch) newPitch = Math.min(newPitch, targetPitch);
+            else newPitch = Math.max(newPitch, targetPitch);
 
             player.setPitch(newPitch);
         }
