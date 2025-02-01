@@ -20,4 +20,4 @@ it's just simple mod to control your elytra, like enabling or disabling elytra a
 ![Easy Flight Toggle Preview](https://i.imgur.com/XRl09VM.gif)
 ## Download
 Modrinth : [Modrinth](https://modrinth.com/mod/elytra-control)<br>
-Curseforge : ~~[Curseforge](https://www.curseforge.com/minecraft/mc-mods/elytra-control)~~
+Curseforge : [Curseforge](https://www.curseforge.com/minecraft/mc-mods/elytra-control)
