@@ -8,6 +8,7 @@ import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.*;
 import net.minecraft.network.chat.*;
 import net.minecraft.resources.*;
+import net.minecraft.util.*;
 
 public class GameHudHandler {
     private static final Minecraft client = Minecraft.getInstance();
@@ -142,7 +143,7 @@ public class GameHudHandler {
                 break;
         }
 
-        var textColor = 0xFF1313;
+        int textColor = ARGB.color(255, 0xFF, 0x13, 0x13); // full alpha + RGB
 
         if (lockIconMode == LockIconMode.ICON_TEXT || lockIconMode == LockIconMode.ICON_ONLY) {
             guiGraphics.blit(RenderPipelines.GUI_TEXTURED, ELYTRA_ICON, iconX, iconY, 0, 0, iconSize, iconSize, iconSize, iconSize);
